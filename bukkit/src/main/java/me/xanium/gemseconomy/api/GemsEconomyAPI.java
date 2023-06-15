@@ -114,6 +114,11 @@ public class GemsEconomyAPI {
     public @Nullable Currency getCurrency(@NonNull String name) {
         requireNonNull(name, "name");
 
-        return plugin.getCurrencyManager().getCurrency(name);
+        Currency currency = plugin.getCurrencyManager().getCurrency(name);
+        if (currency == null) {
+            throw new NullPointerException("\"%s\"".formatted(name));
+        }
+
+        return currency;
     }
 }
